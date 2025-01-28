@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
     const { loading, errMsg, recipeData, dataErr, search, setActiveBar } = useContext(GlobalContext);
+
+    setActiveBar("Home")
     return (
         <div className={loading || errMsg || dataErr ? "flex flex-col items-center" : recipeData?.recipes?  "grid grid-cols-3 gap-4 place-items-center" : "text-center"}>
             {
