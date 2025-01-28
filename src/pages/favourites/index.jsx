@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react"
 import { GlobalContext } from "../../context"
 import { Link } from "react-router-dom";
+import { FcLike } from "react-icons/fc";
+
 
 
 export default function Favourites() {
@@ -23,7 +25,7 @@ export default function Favourites() {
                         </div>
                     )
                 })
-                    : <div className="text-[#f8f8f8] font-bold">Nothing in the favourites to show</div>
+                    : <div className="text-[#f8f8f8] font-bold">Nothing in the favourites to show. Tap on "<span className="inline-block align-text-bottom" ><FcLike /></span>" in the details page to add an item to the favourites </div>
             }
         </div>
     )
