@@ -4,13 +4,14 @@ export const GlobalContext = createContext(null);
 
 export default function GlobalState({ children }) {
 
-    const [search, setSearch] = useState('Mango');
+    const [search, setSearch] = useState('');
     const [favourites, setFavourites] = useState([]);
     const [recipeData, setRecepieData] = useState('');
     const [recipeDetails, setRecipeDetails] = useState('');
     const [loading, setLoading] = useState(false);
     const [dataErr, setDataErr] = useState(false);
     const [errMsg, setErrMsg] = useState('');
+    const [activeBar, setActiveBar] = useState('Home');
 
     function handleSubmit(event) {
         if (event) event.preventDefault();
@@ -33,17 +34,27 @@ export default function GlobalState({ children }) {
             });
     }
 
+    function handleFavourites(recipeItem) {
+        let cpyFavourite = [...favourites];
+        const index = cpyFavourite.findIndex(item => item.recipe_id === recipeItem.recipe_id);
+        if (index === -1) cpyFavourite.push(recipeItem);
+        else cpyFavourite.splice(index, 1);
+        setFavourites(cpyFavourite)
+    }
 
-    function handleFavourites(item) {
-        const cpyFavourite = [...favourites];
-        
-
+    function checkFavourites(recipeItem) {
+        let cpyFavourite = [...favourites];
+        const index = cpyFavourite.findIndex(item => item.recipe_id === recipeItem.recipe_id);
+        if (index === -1) {
+            return true
+        }
+        return false
     }
 
     useState(() => {
-        handleSubmit();
+        if (search !== '') handleSubmit();
     }, [])
     return (
-        <GlobalContext.Provider value={{ search, setSearch, handleSubmit, loading, recipeData, errMsg, dataErr, setDataErr, recipeDetails, setRecipeDetails, handleFavourites }}>{children}</GlobalContext.Provider>
+        <GlobalContext.Provider value={{ search, setSearch, handleSubmit, loading, recipeData, errMsg, dataErr, setDataErr, recipeDetails, setRecipeDetails, handleFavourites, favourites, checkFavourites, activeBar, setActiveBar}}>{children}</GlobalContext.Provider>
     )
 }

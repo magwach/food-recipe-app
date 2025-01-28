@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 
 export default function Home() {
-    const { loading, errMsg, recipeData, dataErr, search, setSearch } = useContext(GlobalContext);
+    const { loading, errMsg, recipeData, dataErr, search, setActiveBar } = useContext(GlobalContext);
     return (
-        <div className={loading || errMsg || dataErr ? "flex flex-col items-center" : "grid grid-cols-3 gap-4 place-items-center"}>
+        <div className={loading || errMsg || dataErr ? "flex flex-col items-center" : recipeData?.recipes?  "grid grid-cols-3 gap-4 place-items-center" : "text-center"}>
             {
                 loading ? <div className="flex flex-col items-center gap-2">
                     <div className="flex space-x-2">
@@ -31,11 +31,11 @@ export default function Home() {
                                         <img src={item.image_url} alt={item.image_url} className="rounded-lg h-1/2 w-screen mb-4"/>
                                         <a href={item.publisher_url} target="_blank" className="text-sm lg:text-2xl text-[#3274cd] font-medium hover:text-[#FFD54F] mb-2 lg:mb-6">{item.publisher}</a>
                                         <p className="text-[#1c1c1c] font-bold text-sm lg:text-2xl">{item.title}</p>
-                                        <Link to={`/details/${item.recipe_id}`} onClick={() => setSearch('')} className="w-full py-2 text-sm lg:text-2xl font-medium text-[#f8f8f8] bg-[#3274cd] hover:bg-[#1c1c1c] rounded-xl mt-3 lg:mt-11 text-center tracking-wider">Recipe Details</Link>
+                                        <Link to={`/details/${item.recipe_id}`} onClick={() => setActiveBar('Details')} className="w-full py-2 text-sm lg:text-2xl font-medium text-[#f8f8f8] bg-[#3274cd] hover:bg-[#1c1c1c] rounded-xl mt-3 lg:mt-11 text-center tracking-wider">Recipe Details</Link>
                                     </div>
                                 )
                             })
-                        : null
+                        : <div className="text-[#f8f8f8] font-bold">Enter the name of the food to then hit enter to search</div>
             }
         </div>
     )
