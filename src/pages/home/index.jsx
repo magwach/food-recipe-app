@@ -29,7 +29,7 @@ export default function Home() {
                         : recipeData?.recipes ? 
                             recipeData.recipes.map((item, key) => {
                                 return(
-                                    <div key={key} className="flex flex-col p-4 bg-[#f8f8f8] h-80 lg:h-150 rounded-lg hover:h-85 duration-100 hover:w-70 cursor-pointer lg:hover:h-160 lg:hover:w-130 hover:z-1">
+                                    <div key={key} className="flex flex-col p-4 bg-[#f8f8f8] h-80 lg:h-150 rounded-lg cursor-pointer hover:scale-105 duration-200 hover:z-1">
                                         <img src={item.image_url} alt={item.image_url} className="rounded-lg h-1/2 w-screen mb-4"/>
                                         <a href={item.publisher_url} target="_blank" className="text-sm lg:text-2xl text-[#3274cd] font-medium hover:text-[#FFD54F] mb-2 lg:mb-6">{item.publisher}</a>
                                         <p className="text-[#1c1c1c] font-bold text-sm lg:text-2xl">{item.title}</p>
